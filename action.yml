@@ -1,0 +1,24 @@
+name: 'Daily XLClick Tip'
+description: 'Sends a daily Excel productivity tip from XLClick.com to a Telegram chat or channel'
+author: 'XLClick'
+branding:
+  icon: 'book-open'
+  color: 'green'
+
+inputs:
+  telegram_key:
+    description: 'Telegram Bot API token obtained from @BotFather'
+    required: true
+  chat_id:
+    description: 'Telegram chat ID or channel username (e.g. @mychannel) to send the tip to'
+    required: true
+
+outputs:
+  tip_id:
+    description: 'Numeric ID of the tip that was sent'
+  tip_name:
+    description: 'Short functionality label of the tip that was sent'
+
+runs:
+  using: 'node20'
+  main: 'src/index.js'
