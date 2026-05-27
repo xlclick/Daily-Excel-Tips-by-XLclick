@@ -1,4 +1,4 @@
-# Daily XLClick Tip
+# Daily Excel Tips by XLClick
 
 A GitHub Action that delivers one Excel productivity tip per day to a Telegram chat or channel — automatically, every morning.
 
