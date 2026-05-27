@@ -25,6 +25,11 @@ the reorganized results onto a new sheet.
 
 The tip rotates daily through all 34 tips in the database, cycling continuously.
 
+The action tracks state in [`data/state.json`](data/state.json) and commits it back to the repo after each successful send. This means:
+
+- **No duplicate sends on the same day.** If the workflow runs twice on the same UTC date (e.g. a manual trigger after the scheduled run), the second run detects that a tip was already sent and exits without messaging Telegram.
+- **No repeats within a cycle.** Each of the 34 tips is sent exactly once before any tip is reused. When a cycle completes, a new one starts — but the very last tip of the previous cycle is held back so it never appears two days in a row.
+
 ---
 
 ## Setup
@@ -67,6 +72,8 @@ Go to **Settings → Secrets and variables → Actions → New repository secret
 Go to the **Actions** tab in your forked repo and click **"I understand my workflows, go ahead and enable them"** if prompted.
 
 The workflow runs automatically at 09:00 UTC every day. You can also trigger it manually any time from the **Actions** tab → **Daily XLClick Tip** → **Run workflow**.
+
+> **Note on workflow permissions:** the bundled workflow needs write access to commit `data/state.json` back to the repo. Go to **Settings → Actions → General → Workflow permissions** and make sure **"Read and write permissions"** is enabled, otherwise the state commit will fail.
 
 ---
 
