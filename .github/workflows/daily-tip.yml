@@ -1,0 +1,24 @@
+name: Daily XLClick Tip
+
+on:
+  schedule:
+    - cron: '0 9 * * *' 
+  workflow_dispatch:    
+
+jobs:
+  send-tip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Daily Tip
+        env:
+          TELEGRAM_KEY: ${{ secrets.TELEGRAM_KEY }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: node src/index.js
